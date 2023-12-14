@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../Calculator.css";
 import HImg from "./hist1.png";
@@ -31,7 +31,7 @@ export default function Calculator() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [num, setNum] = useState("0");
   const [calc, setCalc] = useState("⠀");
-  const [render, setRender] = useState(false);
+  const [, setRender] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   //useEffect to return the function
@@ -121,6 +121,8 @@ export default function Calculator() {
           setCalc(Math.ceil(result * 1000) / 1000 + e.target.textContent);
           setNum("0");
           break;
+        default:
+          break;
       }
     }
     setNum("0");
@@ -134,7 +136,12 @@ export default function Calculator() {
   return (
     <div className="grid-container">
       <div className="item it1">
-        <img onClick={openModal} className="hImg it1Child" src={HImg}></img>
+        <img
+          alt="History"
+          onClick={openModal}
+          className="hImg it1Child"
+          src={HImg}
+        ></img>
         <p className="it1Child">{calc}</p>
         <p className="it1Child">{num + ""}</p>
       </div>
@@ -146,6 +153,7 @@ export default function Calculator() {
       >
         {historyLi.length !== 0 ? (
           <img
+            alt="Trash"
             onClick={trashClick}
             style={{ position: "fixed", left: "10px", marginTop: "10px" }}
             src={Timg}
@@ -169,6 +177,7 @@ export default function Calculator() {
       <div className="item it2">
         {historyLi.length !== 0 ? (
           <img
+            alt="Trash"
             onClick={trashClick}
             style={{ position: "fixed" }}
             src={Timg}
@@ -368,6 +377,8 @@ export default function Calculator() {
                     num: trimDecimalZeros(result.toFixed(3)) + "",
                   });
                   setCalc("⠀");
+                  break;
+                default:
                   break;
               }
             }
