@@ -60,6 +60,7 @@ export default function Calculator() {
   function closeModal() {
     setIsOpen(false);
   }
+  //trimming unwanted decimal zeros for values accross the app
   function trimDecimalZeros(number) {
     const str = number.toString();
     const trimmedStr = str.replace(/(\.[0-9]*[1-9])0+$/, "$1");
@@ -67,13 +68,16 @@ export default function Calculator() {
     console.log(historyLi);
     return parseFloat(trimmedStr);
   }
+  //history delete function
   function trashClick() {
     historyLi = [];
     setRender((render) => !render);
   }
+  //function to check if the value has floating point
   function isDecimal(number) {
     return number !== Math.floor(number);
   }
+  //any arithmatic or exponential operation button calls this function
   function operation(e) {
     if (num === "0" && calc === "⠀") {
       setCalc("⠀");
@@ -121,6 +125,7 @@ export default function Calculator() {
     }
     setNum("0");
   }
+  //num state setter function
   function numberSet(e) {
     num === "0"
       ? setNum(e.target.textContent + "")
