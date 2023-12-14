@@ -10,7 +10,7 @@ const customStyles = {
     bottom: "0px",
     left: "0px",
     width: "100%",
-    backgroundColor: "#202020",
+    backgroundColor: "#121111",
     animation: "slideUp 0.3s ease-out",
     marginTop: "70%",
     height: "80%",
