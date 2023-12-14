@@ -13,7 +13,7 @@ const customStyles = {
     backgroundColor: "#202020",
     animation: "slideUp 0.3s ease-out",
     marginTop: "70%",
-    height: "100%",
+    height: "80%",
     border: "0px",
     display: "flex",
     flexDirection: "column",
