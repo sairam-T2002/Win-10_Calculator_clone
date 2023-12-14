@@ -123,6 +123,7 @@
 @media only screen and (max-width: 600px) {
   body {
     font-size: 16px;
+    height: 100vh;
   }
   .it2 {
     grid-column: 0 / 0;
