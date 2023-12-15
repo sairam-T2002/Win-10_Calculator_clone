@@ -12,8 +12,8 @@ const customStyles = {
     width: "100%",
     backgroundColor: "#121111",
     animation: "slideUp 0.3s ease-out",
-    marginTop: "70%",
-    height: "80%",
+    marginTop: "auto",
+    height: "50%",
     border: "0px",
     display: "flex",
     flexDirection: "column",
@@ -22,6 +22,9 @@ const customStyles = {
   },
   overlay: {
     backgroundColor: "rgba(24, 24, 24, 0.2)",
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
   },
 };
 
