@@ -11,7 +11,7 @@ const customStyles = {
     left: "0px",
     width: "100%",
     backgroundColor: "#121111",
-    animation: "slideUp 0.3s ease-out",
+    animation: "slideUp 0.2 s ease-out",
     marginTop: "auto",
     height: "50%",
     border: "0px",
@@ -98,7 +98,7 @@ export default function Calculator() {
       num === "0" &&
       (calc.charAt(calc.length - 1) === "+" ||
         calc.charAt(calc.length - 1) === "-" ||
-        calc.charAt(calc.length - 1) === "x" ||
+        calc.charAt(calc.length - 1) === "×" ||
         calc.charAt(calc.length - 1) === "%" ||
         calc.charAt(calc.length - 1) === "÷")
     ) {
@@ -124,7 +124,7 @@ export default function Calculator() {
           setCalc(Math.ceil(result * 1000) / 1000 + e.target.textContent);
           setNum("0");
           break;
-        case "x":
+        case "×":
           result = calpre * +num;
           setCalc(Math.ceil(result * 1000) / 1000 + e.target.textContent);
           setNum("0");
@@ -206,7 +206,11 @@ export default function Calculator() {
           <h4 style={{ color: "#f0f0f0" }}>No history</h4>
         )}
         {historyLi.map((item, index) => (
-          <div onClick={hisClick} className="histList" key={index}>
+          <div
+            onClick={hisClick}
+            className={`histList ${index === 0 ? "active" : ""}`}
+            key={index}
+          >
             <p style={{ color: "#8f8f8f" }}>{item.calc}</p>
             <p style={{ fontSize: "35px" }}>{item.num}</p>
           </div>
@@ -252,10 +256,10 @@ export default function Calculator() {
           onClick={() => {
             const result = trimDecimalZeros((+num * +num).toFixed(3));
             historyLi.unshift({
-              calc: num + "x" + num + "=",
+              calc: num + "×" + num + "=",
               num: result + "",
             });
-            setCalc(num + "x" + num);
+            setCalc(num + "×" + num);
             setNum(result + "");
           }}
           className="btns btn6 op"
@@ -289,7 +293,7 @@ export default function Calculator() {
           9
         </div>
         <div onClick={operation} className="btns btn12 op op1">
-          x
+          ×
         </div>
         <div onClick={numberSet} className="btns btn13">
           4
@@ -366,7 +370,7 @@ export default function Calculator() {
                   });
                   setCalc("⠀");
                   break;
-                case "x":
+                case "×":
                   result = calpre * +num;
                   isDecimal(result)
                     ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
