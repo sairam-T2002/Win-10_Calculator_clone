@@ -11,7 +11,7 @@ const customStyles = {
     left: "0px",
     width: "100%",
     backgroundColor: "#121111",
-    animation: "slideUp 0.3s ease-out",
+    animation: "slideUp 0.2s ease-out",
     marginTop: "auto",
     height: "50%",
     border: "0px",
@@ -21,7 +21,7 @@ const customStyles = {
     padding: "0px",
   },
   overlay: {
-    backgroundColor: "rgba(24, 24, 24, 0.2)",
+    backgroundColor: "rgba(33, 33, 33,0.5)",
     flex: 1,
     display: "flex",
     flexDirection: "column",
