@@ -11,7 +11,7 @@ const customStyles = {
     left: "0px",
     width: "100%",
     backgroundColor: "#121111",
-    animation: "slideUp 0.2 s ease-out",
+    animation: "slideUp 0.3s ease-out",
     marginTop: "auto",
     height: "50%",
     border: "0px",
