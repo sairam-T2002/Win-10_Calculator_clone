@@ -10,7 +10,7 @@ const customStyles = {
     bottom: "0px",
     left: "0px",
     width: "100%",
-    backgroundColor: "#121111",
+    backgroundColor: "#202020",
     animation: "slideUp 0.2s ease-out",
     marginTop: "auto",
     height: "50%",
@@ -19,9 +19,11 @@ const customStyles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "0px",
+    boxShadow:
+      "rgba(255, 255, 255, 0.2) 0px 10px 15px, rgba(255, 255, 255, 0.1) 0px -6px 10px, rgba(255, 255, 255, 0.1) 0px 2px 3px, rgba(255, 255, 255, 0.15) 0px 6px 7px, rgba(255, 255, 255, 0.07) 0px -2px 3px",
   },
   overlay: {
-    backgroundColor: "rgba(33, 33, 33,0.5)",
+    backgroundColor: "rgba(32, 32, 32,0.7)",
     flex: 1,
     display: "flex",
     flexDirection: "column",
