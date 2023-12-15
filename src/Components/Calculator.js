@@ -67,8 +67,6 @@ export default function Calculator() {
   function trimDecimalZeros(number) {
     const str = number.toString();
     const trimmedStr = str.replace(/(\.[0-9]*[1-9])0+$/, "$1");
-    console.log(historyLi.length);
-    console.log(historyLi);
     return parseFloat(trimmedStr);
   }
   //history delete function
@@ -80,6 +78,16 @@ export default function Calculator() {
   function isDecimal(number) {
     return number !== Math.floor(number);
   }
+  //clicking on history
+  function hisClick(e) {
+    const calcArr = e.target.closest(".histList").textContent.split("=");
+    if (calcArr[0] !== "²" || calcArr[0] !== "√" || calcArr[0]) {
+      setCalc(calcArr[0] + "=");
+    }
+    setNum(calcArr[1]);
+    console.log(calcArr);
+  }
+
   //any arithmatic or exponential operation button calls this function
   function operation(e) {
     if (num === "0" && calc === "⠀") {
@@ -95,6 +103,13 @@ export default function Calculator() {
         calc.charAt(calc.length - 1) === "÷")
     ) {
       setCalc(calc.slice(0, -1) + e.target.textContent);
+    } else if (
+      num !== "0" &&
+      calc !== "⠀" &&
+      calc.charAt(calc.length - 1) === "="
+    ) {
+      setCalc(num + e.target.textContent);
+      setNum("0");
     } else if (num !== "0" && calc !== "⠀") {
       const calpre = +calc.slice(0, -1);
       let result;
@@ -191,7 +206,7 @@ export default function Calculator() {
           <h4 style={{ color: "#f0f0f0" }}>No history</h4>
         )}
         {historyLi.map((item, index) => (
-          <div className="histList" key={index}>
+          <div onClick={hisClick} className="histList" key={index}>
             <p style={{ color: "#8f8f8f" }}>{item.calc}</p>
             <p style={{ fontSize: "35px" }}>{item.num}</p>
           </div>
@@ -223,9 +238,10 @@ export default function Calculator() {
           onClick={() => {
             const result = trimDecimalZeros((1 / +num).toFixed(3));
             historyLi.unshift({
-              calc: "(1/" + num + ")=",
+              calc: "1÷" + num + "=",
               num: result + "",
             });
+            setCalc("1÷" + num);
             setNum(result + "");
           }}
           className="btns btn5 op"
@@ -236,9 +252,10 @@ export default function Calculator() {
           onClick={() => {
             const result = trimDecimalZeros((+num * +num).toFixed(3));
             historyLi.unshift({
-              calc: "(" + num + ")²=",
+              calc: num + "x" + num + "=",
               num: result + "",
             });
+            setCalc(num + "x" + num);
             setNum(result + "");
           }}
           className="btns btn6 op"
@@ -252,6 +269,7 @@ export default function Calculator() {
               calc: "√(" + num + ")=",
               num: result + "",
             });
+            setCalc("√(" + num + ")");
             setNum(result + "");
           }}
           className="btns btn7 op"
@@ -385,7 +403,6 @@ export default function Calculator() {
                   break;
               }
             }
-            console.log(historyLi);
           }}
           className="btns btn24 op1"
         >
