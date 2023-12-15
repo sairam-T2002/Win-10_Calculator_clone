@@ -360,7 +360,7 @@ export default function Calculator() {
                   result = calpre / +num;
                   isDecimal(result)
                     ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(num + "");
+                    : setNum(result + "");
                   historyLi.unshift({
                     calc: calc + num + "=",
                     num: trimDecimalZeros(result.toFixed(3)) + "",
