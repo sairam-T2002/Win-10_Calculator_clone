@@ -87,7 +87,14 @@ export default function Calculator() {
       setCalc(calcArr[0] + "=");
     }
     setNum(calcArr[1]);
-    console.log(calcArr);
+  }
+  function hisMClick(e) {
+    const calcArr = e.target.closest(".modal-his").textContent.split("=");
+    if (calcArr[0] !== "²" || calcArr[0] !== "√" || calcArr[0]) {
+      setCalc(calcArr[0] + "=");
+    }
+    setNum(calcArr[1]);
+    setIsOpen(false);
   }
 
   //any arithmatic or exponential operation button calls this function
@@ -184,7 +191,7 @@ export default function Calculator() {
           <h4 style={{ color: "#f0f0f0" }}>No history</h4>
         )}
         {historyLi.map((item, index) => (
-          <div className="modal-his" key={index}>
+          <div onClick={hisMClick} className="modal-his" key={index}>
             <p style={{ color: "#8f8f8f" }} className="modal-text">
               {item.calc}
             </p>
