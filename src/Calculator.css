@@ -4,6 +4,7 @@ html {
   margin: 0;
   display: flex;
   flex-direction: column;
+  background-color: #202020;
 }
 .grid-container {
   display: grid;
@@ -131,7 +132,6 @@ html {
 @media only screen and (max-width: 600px) {
   body {
     font-size: 16px;
-    height: 100vh;
   }
   .it2 {
     grid-column: 0 / 0;
