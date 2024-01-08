@@ -1,3 +1,7 @@
+/* calculator component that fully takes the space of the container
+ * has the ability perform simple calculations and also ability to store the history of
+ * calculations, fully responsive design, works flawlessly on variety of devices
+ */
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../Calculator.css";
@@ -33,11 +37,11 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function Calculator() {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [num, setNum] = useState("0");
-  const [calc, setCalc] = useState("⠀");
-  const [, setRender] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [modalIsOpen, setIsOpen] = useState(false); //modal state
+  const [num, setNum] = useState("0"); //result state and number state
+  const [calc, setCalc] = useState("⠀"); //calculation state
+  const [, setRender] = useState(false); //forcing re-render using dummy state
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth); //state used for saving screenWidth
 
   //useEffect check for change in screen width and set the screen width
   useEffect(() => {
@@ -88,6 +92,7 @@ export default function Calculator() {
     }
     setNum(calcArr[1]);
   }
+  //clicking on history for mobile view
   function hisMClick(e) {
     const calcArr = e.target.closest(".modal-his").textContent.split("=");
     if (calcArr[0] !== "²" || calcArr[0] !== "√" || calcArr[0]) {
@@ -166,6 +171,7 @@ export default function Calculator() {
       setNum(num + e.target.textContent + "");
     }
   }
+  //handles sign change button
   function signChange() {
     if (+num < 0) {
       setNum(-+num + "");
@@ -173,6 +179,7 @@ export default function Calculator() {
       setNum(-+num + "");
     }
   }
+  //handles equal button
   function equalToOperation() {
     if (num !== "0" && calc !== "⠀") {
       const calpre = +calc.slice(0, -1);
@@ -238,6 +245,7 @@ export default function Calculator() {
       }
     }
   }
+  //mark up for calculator component
   return (
     <div className="grid-container">
       <div className="item it1">
