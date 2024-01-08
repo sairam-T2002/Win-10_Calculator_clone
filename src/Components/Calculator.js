@@ -39,7 +39,7 @@ export default function Calculator() {
   const [, setRender] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  //useEffect to return the function
+  //useEffect check for change in screen width and set the screen width
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -50,7 +50,7 @@ export default function Calculator() {
     };
   }, []);
 
-  //useEffect to check for screenwidth
+  //useEffect to check for change in screenwidth
   useEffect(() => {
     if (screenWidth > 600) {
       setIsOpen(false);
@@ -160,6 +160,84 @@ export default function Calculator() {
       ? setNum(e.target.textContent + "")
       : setNum(num + e.target.textContent + "");
   }
+  //decimal operation function
+  function addDecimalPoint(e) {
+    if (!num.includes(".")) {
+      setNum(num + e.target.textContent + "");
+    }
+  }
+  function signChange() {
+    if (+num < 0) {
+      setNum(-+num + "");
+    } else {
+      setNum(-+num + "");
+    }
+  }
+  function equalToOperation() {
+    if (num !== "0" && calc !== "⠀") {
+      const calpre = +calc.slice(0, -1);
+      let result;
+      switch (calc.charAt(calc.length - 1)) {
+        case "+":
+          result = calpre + +num;
+          isDecimal(result)
+            ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
+            : setNum(result + "");
+          historyLi.unshift({
+            calc: calc + num + "=",
+            num: trimDecimalZeros(result.toFixed(3)) + "",
+          });
+          setCalc("⠀");
+          break;
+        case "-":
+          result = calpre - +num;
+          isDecimal(result)
+            ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
+            : setNum(result + "");
+          historyLi.unshift({
+            calc: calc + num + "=",
+            num: trimDecimalZeros(result.toFixed(3)) + "",
+          });
+          setCalc("⠀");
+          break;
+        case "×":
+          result = calpre * +num;
+          isDecimal(result)
+            ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
+            : setNum(result + "");
+          historyLi.unshift({
+            calc: calc + num + "=",
+            num: trimDecimalZeros(result.toFixed(3)) + "",
+          });
+          setCalc("⠀");
+          break;
+        case "÷":
+          result = calpre / +num;
+          isDecimal(result)
+            ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
+            : setNum(result + "");
+          historyLi.unshift({
+            calc: calc + num + "=",
+            num: trimDecimalZeros(result.toFixed(3)) + "",
+          });
+          setCalc("⠀");
+          break;
+        case "%":
+          result = calpre % +num;
+          isDecimal(result)
+            ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
+            : setNum(result + "");
+          historyLi.unshift({
+            calc: calc + num + "=",
+            num: trimDecimalZeros(result.toFixed(3)) + "",
+          });
+          setCalc("⠀");
+          break;
+        default:
+          break;
+      }
+    }
+  }
   return (
     <div className="grid-container">
       <div className="item it1">
@@ -250,6 +328,7 @@ export default function Calculator() {
         <div
           onClick={() => {
             const result = trimDecimalZeros((1 / +num).toFixed(3));
+            if (result === Infinity) return;
             historyLi.unshift({
               calc: "1÷" + num + "=",
               num: result + "",
@@ -264,6 +343,7 @@ export default function Calculator() {
         <div
           onClick={() => {
             const result = trimDecimalZeros((+num * +num).toFixed(3));
+            if (result === 0) return;
             historyLi.unshift({
               calc: num + "×" + num + "=",
               num: result + "",
@@ -278,6 +358,7 @@ export default function Calculator() {
         <div
           onClick={() => {
             const result = trimDecimalZeros(Math.sqrt(+num).toFixed(3));
+            if (result === 0) return;
             historyLi.unshift({
               calc: "√(" + num + ")=",
               num: result + "",
@@ -328,97 +409,16 @@ export default function Calculator() {
         <div onClick={operation} className="btns btn20 op op1">
           +
         </div>
-        <div
-          onClick={() => {
-            if (+num < 0) {
-              setNum(-+num + "");
-            } else {
-              setNum(-+num + "");
-            }
-          }}
-          className="btns btn21"
-        >
+        <div onClick={signChange} className="btns btn21">
           +/-
         </div>
         <div onClick={numberSet} className="btns btn22">
           0
         </div>
-        <div
-          onClick={(e) =>
-            !num.includes(".") ? setNum(num + e.target.textContent + "") : ""
-          }
-          className="btns btn23"
-        >
+        <div onClick={addDecimalPoint} className="btns btn23">
           .
         </div>
-        <div
-          onClick={(e) => {
-            if (num !== "0" && calc !== "⠀") {
-              const calpre = +calc.slice(0, -1);
-              let result;
-              switch (calc.charAt(calc.length - 1)) {
-                case "+":
-                  result = calpre + +num;
-                  isDecimal(result)
-                    ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(result + "");
-                  historyLi.unshift({
-                    calc: calc + num + "=",
-                    num: trimDecimalZeros(result.toFixed(3)) + "",
-                  });
-                  setCalc("⠀");
-                  break;
-                case "-":
-                  result = calpre - +num;
-                  isDecimal(result)
-                    ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(result + "");
-                  historyLi.unshift({
-                    calc: calc + num + "=",
-                    num: trimDecimalZeros(result.toFixed(3)) + "",
-                  });
-                  setCalc("⠀");
-                  break;
-                case "×":
-                  result = calpre * +num;
-                  isDecimal(result)
-                    ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(result + "");
-                  historyLi.unshift({
-                    calc: calc + num + "=",
-                    num: trimDecimalZeros(result.toFixed(3)) + "",
-                  });
-                  setCalc("⠀");
-                  break;
-                case "÷":
-                  result = calpre / +num;
-                  isDecimal(result)
-                    ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(result + "");
-                  historyLi.unshift({
-                    calc: calc + num + "=",
-                    num: trimDecimalZeros(result.toFixed(3)) + "",
-                  });
-                  setCalc("⠀");
-                  break;
-                case "%":
-                  result = calpre % +num;
-                  isDecimal(result)
-                    ? setNum(trimDecimalZeros(result.toFixed(3)) + "")
-                    : setNum(result + "");
-                  historyLi.unshift({
-                    calc: calc + num + "=",
-                    num: trimDecimalZeros(result.toFixed(3)) + "",
-                  });
-                  setCalc("⠀");
-                  break;
-                default:
-                  break;
-              }
-            }
-          }}
-          className="btns btn24 op1"
-        >
+        <div onClick={equalToOperation} className="btns btn24 op1">
           =
         </div>
       </div>
